@@ -15,6 +15,9 @@ import SignIn from '../pages/Authentication/SignIn';
 import SignUp from '../pages/Authentication/SignUp';
 import MainLayout from '../layout/MainLayout';
 import PrivateRoutes from './PrivateRoutes';
+import Lessons from '../pages/Lessons/Lessons';
+import Vocabulary from '../pages/Vocabulary/Vocabulary';
+import Tutorials from '../pages/Tutorials/Tutorials';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +40,37 @@ const router = createBrowserRouter([
             <PageTitle title="Signup" />
             <SignUp />
           </>
+        ),
+      },
+      {
+        path: '/lessons',
+        element: (
+          <PrivateRoutes>
+            <>
+              <PageTitle title="Lessons" />
+              <Lessons />
+            </>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: '/vocabolaries',
+        element: (
+          <>
+            <PageTitle title="Vocabolary" />
+            <Vocabulary />
+          </>
+        ),
+      },
+      {
+        path: '/tutorials',
+        element: (
+          <PrivateRoutes>
+            <>
+              <PageTitle title="Tutorials" />
+              <Tutorials />
+            </>
+          </PrivateRoutes>
         ),
       },
     ],

@@ -1,7 +1,62 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { JwtPayload } from 'jsonwebtoken';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { decodedToken } from '../../helpers/utils/jwt';
+import { useUserLoginMutation } from '../../redux/api/authApi';
+import { storeUserInfo } from '../../services/auth.service';
+import { useState } from 'react';
 
 const SignIn: React.FC = () => {
+  const [userLogin] = useUserLoginMutation();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
+    try {
+      event.preventDefault();
+      const form = event.target as HTMLFormElement;
+      const email = form.email.value;
+      const password = form.password.value;
+
+      console.log('Email:', email);
+      console.log('Password:', password);
+      const loginData = {
+        contactNo: email,
+        password: password,
+      };
+
+      const res = await userLogin(loginData);
+
+      const responseToken =
+        'error' in res ? undefined : res.data?.data?.accessToken;
+
+      if ('data' in res && res.data?.data?.accessToken) {
+        setIsLoading(!isLoading);
+
+        toast.success('User logged in successfully!');
+
+        const decodedData: JwtPayload = decodedToken(responseToken);
+
+        if (decodedData?.role === 'admin') {
+          navigate('/dashboard');
+        } else {
+          navigate('/lessons');
+        }
+
+        storeUserInfo({ accessToken: res?.data?.data?.accessToken });
+      } else {
+        setIsLoading(false);
+        navigate('/auth/signin');
+        return toast.error('Wrong credential!');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {/* <Breadcrumb pageName="Sign In" /> */}
@@ -153,7 +208,7 @@ const SignIn: React.FC = () => {
                 Sign In
               </h2>
 
-              <form>
+              <form onSubmit={onSubmit}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Email
@@ -161,6 +216,7 @@ const SignIn: React.FC = () => {
                   <div className="relative">
                     <input
                       type="email"
+                      name="email"
                       placeholder="Enter your email"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
@@ -192,6 +248,7 @@ const SignIn: React.FC = () => {
                   <div className="relative">
                     <input
                       type="password"
+                      name="password"
                       placeholder="6+ Characters, 1 Capital letter"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />

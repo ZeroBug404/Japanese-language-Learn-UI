@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import Loader from './common/Loader';
 import AppRoutes from './routes/Routes';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -16,9 +17,15 @@ function App() {
   }, []);
 
   return loading ? (
-    <Loader />
+    <>
+      <Loader />
+      <Toaster />
+    </>
   ) : (
-    <AppRoutes />
+    <>
+      <AppRoutes />
+      <Toaster />
+    </>
     // <DefaultLayout>
     //   <Routes>
     //     <Route
