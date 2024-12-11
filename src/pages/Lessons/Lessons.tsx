@@ -1,7 +1,11 @@
+import Lesson from '../../components/Lesson/Lesson';
+
 const Lessons = () => {
   return (
-    <div>
-      <h2>Lessons</h2>
+    <div className="flex gap-5 justify-between items-center">
+      <Lesson name="title 1" description="lorem10" />
+      <Lesson name="title 1" description="lorem10" />
+      <Lesson name="title 1" description="lorem10" />
     </div>
   );
 };

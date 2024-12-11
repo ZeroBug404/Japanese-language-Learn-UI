@@ -1,7 +1,61 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { JwtPayload } from 'jsonwebtoken';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { decodedToken } from '../../helpers/utils/jwt';
+import { useUserRegisterMutation } from '../../redux/api/authApi';
+import { storeUserInfo } from '../../services/auth.service';
 
 const SignUp: React.FC = () => {
+  const [userRegister] = useUserRegisterMutation();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
+    try {
+      event.preventDefault();
+      const form = event.target as HTMLFormElement;
+      const email = form.email.value;
+      const password = form.password.value;
+
+      console.log('Email:', email);
+      console.log('Password:', password);
+
+      const registerData = {
+        email: email,
+        password: password,
+      };
+
+      const res = await userRegister(registerData);
+
+      const responseToken =
+        'error' in res ? undefined : res.data?.data?.accessToken;
+
+      if ('data' in res && res.data?.data?.accessToken) {
+        setIsLoading(!isLoading);
+
+        toast.success('User registered successfully!');
+
+        const decodedData: JwtPayload = decodedToken(responseToken);
+
+        if (decodedData?.role === 'admin') {
+          navigate('/dashboard');
+        } else {
+          navigate('/lessons');
+        }
+
+        storeUserInfo({ accessToken: res?.data?.data?.accessToken });
+      } else {
+        setIsLoading(false);
+        navigate('/auth/login');
+        return toast.error('Wrong credential!');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {/* <Breadcrumb pageName="Sign Up" /> */}
@@ -152,7 +206,7 @@ const SignUp: React.FC = () => {
                 Sign Up
               </h2>
 
-              <form>
+              <form onSubmit={onSubmit}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Name
@@ -161,6 +215,7 @@ const SignUp: React.FC = () => {
                     <input
                       type="text"
                       placeholder="Enter your full name"
+                      name="name"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
 
@@ -195,6 +250,7 @@ const SignUp: React.FC = () => {
                   <div className="relative">
                     <input
                       type="email"
+                      name="email"
                       placeholder="Enter your email"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />

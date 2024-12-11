@@ -18,10 +18,14 @@ const Navbar = () => {
 
   const Links = [
     { name: 'Home', link: '/' },
+    { name: 'Lessons', link: '/lessons' },
+    { name: 'Vocabulary', link: '/vocabolaries' },
+    { name: 'Tutorials', link: '/tutorials' },
   ];
 
   const LinksForAdmin = [
     { name: 'Home', link: '/' },
+    { name: 'Lessons', link: '/lessons' },
     { name: 'Dashboard', link: '/dashboard' },
   ];
   const [open, setOpen] = useState(false);
