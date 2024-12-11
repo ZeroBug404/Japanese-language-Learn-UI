@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: '/auth/signin',
+        path: '/auth/login',
         element: (
           <>
             <PageTitle title="Signin" />
@@ -78,7 +78,7 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: (
-      <PrivateRoutes>
+      <PrivateRoutes requiredRole="admin">
         <DefaultLayout>
           <>
             <PageTitle title="eCommerce Dashboard" />

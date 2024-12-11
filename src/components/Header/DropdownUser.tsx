@@ -1,10 +1,18 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ClickOutside from '../ClickOutside';
 import UserOne from '../../images/user/user-01.png';
+import { getUserInfo, removeUserInfo } from '../../services/auth.service';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { role } = getUserInfo() as any;
+  const navigate = useNavigate();
+
+  const handleLogout = (accessToken: string) => {
+    removeUserInfo(accessToken);
+    return navigate('/auth/login');
+  };
 
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
@@ -119,7 +127,10 @@ const DropdownUser = () => {
               </Link>
             </li>
           </ul>
-          <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+          <button
+            className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+            onClick={() => handleLogout('accessToken')}
+          >
             <svg
               className="fill-current"
               width="22"

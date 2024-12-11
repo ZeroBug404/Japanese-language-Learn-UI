@@ -13,6 +13,9 @@ const Navbar = () => {
   const { role } = getUserInfo() as any;
   const navigate = useNavigate();
 
+  // console.log(role);
+  
+
   const Links = [
     { name: 'Home', link: '/' },
   ];
@@ -25,7 +28,7 @@ const Navbar = () => {
 
   const handleLogout = (accessToken: string) => {
     removeUserInfo(accessToken);
-    return navigate('/auth/signin');
+    return navigate('/auth/login');
   };
 
   return (
@@ -103,7 +106,7 @@ const Navbar = () => {
             </button>
           ) : (
             <Link
-              to={'/auth/signin'}
+              to={'/auth/login'}
               style={{
                 cursor: 'pointer',
               }}

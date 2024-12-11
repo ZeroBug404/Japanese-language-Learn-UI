@@ -24,7 +24,7 @@ const SignIn: React.FC = () => {
       console.log('Email:', email);
       console.log('Password:', password);
       const loginData = {
-        contactNo: email,
+        email: email,
         password: password,
       };
 
@@ -49,7 +49,7 @@ const SignIn: React.FC = () => {
         storeUserInfo({ accessToken: res?.data?.data?.accessToken });
       } else {
         setIsLoading(false);
-        navigate('/auth/signin');
+        navigate('/auth/login');
         return toast.error('Wrong credential!');
       }
     } catch (error) {
