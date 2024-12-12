@@ -18,6 +18,7 @@ import PrivateRoutes from './PrivateRoutes';
 import Lessons from '../pages/Lessons/Lessons';
 import Vocabulary from '../pages/Vocabulary/Vocabulary';
 import Tutorials from '../pages/Tutorials/Tutorials';
+import LessonDetails from '../components/Lesson/LessonDetails';
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,17 @@ const router = createBrowserRouter([
             <>
               <PageTitle title="Lessons" />
               <Lessons />
+            </>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: '/lessons/:lessonId',
+        element: (
+          <PrivateRoutes>
+            <>
+              <PageTitle title="Lessons" />
+              <LessonDetails />
             </>
           </PrivateRoutes>
         ),
