@@ -1,5 +1,5 @@
+import React from 'react';
 import { Package } from '../../types/package';
-
 const packageData: Package[] = [
   {
     name: 'Free package',

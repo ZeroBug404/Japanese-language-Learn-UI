@@ -1,3 +1,5 @@
+
+import React from 'react';
 import { Product } from '../../types/product';
 import ProductOne from '../../images/product/product-01.png';
 import ProductTwo from '../../images/product/product-02.png';

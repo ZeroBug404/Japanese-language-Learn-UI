@@ -13,6 +13,7 @@ export const lessonApi = baseApi.injectEndpoints({
         url: `lessons/create`,
         method: 'POST',
         body: lessonData,
+        headers: headers,
       }),
     }),
     getAllLesson: build.query({
@@ -26,6 +27,7 @@ export const lessonApi = baseApi.injectEndpoints({
       query: ({ id }) => ({
         url: `lessons/${id}`,
         method: 'GET',
+        headers: headers,
       }),
     }),
     updateLesson: build.mutation({
@@ -33,6 +35,7 @@ export const lessonApi = baseApi.injectEndpoints({
         url: `lessons/${id}`,
         method: 'PATCH',
         body: data,
+        headers: headers,
       }),
     }),
   }),
@@ -42,4 +45,5 @@ export const {
   useCreateLessonMutation,
   useGetAllLessonQuery,
   useGetSingleLessonQuery,
+  useUpdateLessonMutation
 } = lessonApi;

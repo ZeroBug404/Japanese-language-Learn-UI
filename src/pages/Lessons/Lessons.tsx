@@ -1,6 +1,7 @@
 import { Key } from 'react';
 import Lesson from '../../components/Lesson/Lesson';
 import { useGetAllLessonQuery } from '../../redux/api/lessonApi';
+import React from 'react';
 
 const Lessons = () => {
   const { data: lessonData, isLoading } = useGetAllLessonQuery({});

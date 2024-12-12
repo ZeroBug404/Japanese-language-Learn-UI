@@ -1,3 +1,4 @@
+import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import PageTitle from '../components/PageTitle';
 import DefaultLayout from '../layout/DefaultLayout';
@@ -19,6 +20,9 @@ import Lessons from '../pages/Lessons/Lessons';
 import Vocabulary from '../pages/Vocabulary/Vocabulary';
 import Tutorials from '../pages/Tutorials/Tutorials';
 import LessonDetails from '../components/Lesson/LessonDetails';
+import LessonsTable from '../components/Lesson/LessonsTable';
+import AddLessons from '../pages/Dashboard/AddLessons';
+import UpdateLesson from '../pages/Dashboard/UpdateLesson';
 
 const router = createBrowserRouter([
   {
@@ -91,21 +95,34 @@ const router = createBrowserRouter([
     path: '/dashboard',
     element: (
       <PrivateRoutes requiredRole="admin">
-        <DefaultLayout>
-          <>
-            <PageTitle title="eCommerce Dashboard" />
-            <ECommerce />
-          </>
-        </DefaultLayout>
+        <DefaultLayout />
       </PrivateRoutes>
     ),
     children: [
       {
-        path: '/dashboard/calendar',
+        path: '/dashboard/lessons',
         element: (
           <>
-            <PageTitle title="Calendar" />
-            <Calendar />
+            <PageTitle title="Lessons" />
+            <LessonsTable />
+          </>
+        ),
+      },
+      {
+        path: '/dashboard/add-lessons',
+        element: (
+          <>
+            <PageTitle title="Lessons" />
+            <AddLessons />
+          </>
+        ),
+      },
+      {
+        path: '/dashboard/update-lesson/:lessonId',
+        element: (
+          <>
+            <PageTitle title="Lessons" />
+            <UpdateLesson />
           </>
         ),
       },

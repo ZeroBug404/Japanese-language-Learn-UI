@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useGetAllVocabularyQuery } from '../../redux/api/vocabularyApi';
 import { useState } from 'react';
+import React from 'react';
 
 //@ts-ignore
 import Confetti from 'react-confetti';
