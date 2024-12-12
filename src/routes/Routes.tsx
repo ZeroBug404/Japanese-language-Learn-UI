@@ -26,27 +26,27 @@ import PrivateRoutes from './PrivateRoutes';
 
 const router = createBrowserRouter([
   {
+    path: '/auth/login',
+    element: (
+      <>
+        <PageTitle title="Signin" />
+        <SignIn />
+      </>
+    ),
+  },
+  {
+    path: '/auth/signup',
+    element: (
+      <>
+        <PageTitle title="Signup" />
+        <SignUp />
+      </>
+    ),
+  },
+  {
     path: '/',
     element: <MainLayout />,
     children: [
-      {
-        path: '/auth/login',
-        element: (
-          <>
-            <PageTitle title="Signin" />
-            <SignIn />
-          </>
-        ),
-      },
-      {
-        path: '/auth/signup',
-        element: (
-          <>
-            <PageTitle title="Signup" />
-            <SignUp />
-          </>
-        ),
-      },
       {
         path: '/lessons',
         element: (
