@@ -1,4 +1,5 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useGetAllVocabularyQuery } from '../../redux/api/vocabularyApi';
 
 interface LessonProps {
   name: string;
@@ -7,15 +8,16 @@ interface LessonProps {
   lessonNumber: number;
 }
 
-const Lesson = ({
-  name,
-  usage,
-  vocabularyCount,
-  lessonNumber,
-}: LessonProps) => {
-  // const { lessonId } = useParams();
+const Lesson = ({ name, usage, lessonNumber }: LessonProps) => {
+  const { data: vocabularyData } = useGetAllVocabularyQuery({});
+  const vocabulary = vocabularyData?.data;
 
-  // console.log(lessonId);
+  // Filter vocabulary based on the lessonId
+  const lessonVocabularies = vocabulary?.filter(
+    (item: { lessonNumber: string | undefined }) =>
+      String(item.lessonNumber) === String(lessonNumber),
+  );
+
 
   return (
     <div className="h-[10rem] bg-white p-4 shadow-2 flex flex-col justify-between">
@@ -25,7 +27,7 @@ const Lesson = ({
       </div>
       <div className="flex justify-between">
         <div className="bg-amber-100 text-amber-500 flex justify-center items-center rounded p-2">
-          <p>{vocabularyCount} vocabolaries</p>
+          <p>{lessonVocabularies?.length} vocabolaries</p>
         </div>
         <Link to={`/lessons/${lessonNumber}`}>
           <button
