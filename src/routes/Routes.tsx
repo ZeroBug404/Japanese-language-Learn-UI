@@ -23,6 +23,8 @@ import LessonDetails from '../components/Lesson/LessonDetails';
 import LessonsTable from '../components/Lesson/LessonsTable';
 import AddLessons from '../pages/Dashboard/AddLessons';
 import UpdateLesson from '../pages/Dashboard/UpdateLesson';
+import VocabularyTable from '../components/Vocabulary/VocabularyTable';
+import AddVocabulary from '../pages/Dashboard/AddVocabulary';
 
 const router = createBrowserRouter([
   {
@@ -123,6 +125,24 @@ const router = createBrowserRouter([
           <>
             <PageTitle title="Lessons" />
             <UpdateLesson />
+          </>
+        ),
+      },
+      {
+        path: '/dashboard/vocabolaries',
+        element: (
+          <>
+            <PageTitle title="Vocabularies" />
+            <VocabularyTable />
+          </>
+        ),
+      },
+      {
+        path: '/dashboard/add-vocabolary',
+        element: (
+          <>
+            <PageTitle title="Vocabularies" />
+            <AddVocabulary />
           </>
         ),
       },

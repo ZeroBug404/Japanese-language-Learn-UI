@@ -8,29 +8,28 @@ import {
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-const LessonsTable = () => {
-  const { data: lessonData, isLoading, refetch } = useGetAllLessonQuery({});
-  const lessons = lessonData?.data;
-
-  const [deleteLesson] = useDeleteLessonMutation();
-
-  const handleDeleteLesson = (id: string) => async () => {
-    if (!window.confirm('Are you sure you want to delete this lesson?')) {
-      return;
-    }
-
-    const res = await deleteLesson({ id });
-
-    if (res.data) {
-      toast.success('Lesson deleted successfully');
-      refetch();
-    } else {
-      toast.error('Failed to delete lesson');
-    }
-  };
-
-  return (
-    <>
+const VocabularyTable = () => {
+    const { data: lessonData, isLoading, refetch } = useGetAllLessonQuery({});
+    const lessons = lessonData?.data;
+  
+    const [deleteLesson] = useDeleteLessonMutation();
+  
+    const handleDeleteLesson = (id: string) => async () => {
+      if (!window.confirm('Are you sure you want to delete this lesson?')) {
+        return;
+      }
+  
+      const res = await deleteLesson({ id });
+  
+      if (res.data) {
+        toast.success('Lesson deleted successfully');
+        refetch();
+      } else {
+        toast.error('Failed to delete lesson');
+      }
+    };
+    return (
+        <>
       <Breadcrumb pageName={'Lessons'} />
 
       <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -146,7 +145,7 @@ const LessonsTable = () => {
         </div>
       </div>
     </>
-  );
+    );
 };
 
-export default LessonsTable;
+export default VocabularyTable;

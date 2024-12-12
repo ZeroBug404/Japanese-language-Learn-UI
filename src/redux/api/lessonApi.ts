@@ -38,6 +38,13 @@ export const lessonApi = baseApi.injectEndpoints({
         headers: headers,
       }),
     }),
+    deleteLesson: build.mutation({
+      query: ({ id }) => ({
+        url: `lessons/${id}`,
+        method: 'DELETE',
+        headers: headers,
+      }),
+    }),
   }),
 });
 
@@ -45,5 +52,6 @@ export const {
   useCreateLessonMutation,
   useGetAllLessonQuery,
   useGetSingleLessonQuery,
-  useUpdateLessonMutation
+  useUpdateLessonMutation,
+  useDeleteLessonMutation,
 } = lessonApi;
