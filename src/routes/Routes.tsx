@@ -1,30 +1,28 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import PageTitle from '../components/PageTitle';
-import DefaultLayout from '../layout/DefaultLayout';
-import ECommerce from '../pages/Dashboard/ECommerce';
-import Calendar from '../pages/Calendar';
-import Profile from '../pages/Profile';
-import FormElements from '../pages/Form/FormElements';
-import FormLayout from '../pages/Form/FormLayout';
-import Tables from '../pages/Tables';
-import Settings from '../pages/Settings';
-import Chart from '../pages/Chart';
-import Alerts from '../pages/UiElements/Alerts';
-import Buttons from '../pages/UiElements/Buttons';
-import SignIn from '../pages/Authentication/SignIn';
-import SignUp from '../pages/Authentication/SignUp';
-import MainLayout from '../layout/MainLayout';
-import PrivateRoutes from './PrivateRoutes';
-import Lessons from '../pages/Lessons/Lessons';
-import Vocabulary from '../pages/Vocabulary/Vocabulary';
-import Tutorials from '../pages/Tutorials/Tutorials';
 import LessonDetails from '../components/Lesson/LessonDetails';
 import LessonsTable from '../components/Lesson/LessonsTable';
-import AddLessons from '../pages/Dashboard/AddLessons';
-import UpdateLesson from '../pages/Dashboard/UpdateLesson';
+import PageTitle from '../components/PageTitle';
 import VocabularyTable from '../components/Vocabulary/VocabularyTable';
+import DefaultLayout from '../layout/DefaultLayout';
+import MainLayout from '../layout/MainLayout';
+import SignIn from '../pages/Authentication/SignIn';
+import SignUp from '../pages/Authentication/SignUp';
+import Chart from '../pages/Chart';
+import AddLessons from '../pages/Dashboard/AddLessons';
 import AddVocabulary from '../pages/Dashboard/AddVocabulary';
+import UpdateLesson from '../pages/Dashboard/UpdateLesson';
+import FormElements from '../pages/Form/FormElements';
+import FormLayout from '../pages/Form/FormLayout';
+import Lessons from '../pages/Lessons/Lessons';
+import Profile from '../pages/Profile';
+import Settings from '../pages/Settings';
+import Tables from '../pages/Tables';
+import Tutorials from '../pages/Tutorials/Tutorials';
+import Alerts from '../pages/UiElements/Alerts';
+import Buttons from '../pages/UiElements/Buttons';
+import Vocabulary from '../pages/Vocabulary/Vocabulary';
+import PrivateRoutes from './PrivateRoutes';
 
 const router = createBrowserRouter([
   {
@@ -51,6 +49,17 @@ const router = createBrowserRouter([
       },
       {
         path: '/lessons',
+        element: (
+          <PrivateRoutes>
+            <>
+              <PageTitle title="Lessons" />
+              <Lessons />
+            </>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: '/',
         element: (
           <PrivateRoutes>
             <>

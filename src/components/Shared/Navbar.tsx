@@ -22,7 +22,6 @@ const Navbar = () => {
 
   const LinksForAdmin = [
     { name: 'Lessons', link: '/lessons' },
-    { name: 'Vocabulary', link: '/vocabolaries' },
     { name: 'Tutorials', link: '/tutorials' },
     { name: 'Dashboard', link: '/dashboard' },
 
